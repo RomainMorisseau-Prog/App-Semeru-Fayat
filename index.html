@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classeur PDF</title>
+<meta name="theme-color" content="#1B2A41">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <img src="icons/icon.svg" alt="" width="44" height="44">
+  <h1>Classeur PDF</h1>
+  <button id="install" class="ghost" hidden>Installer l’app</button>
+  <button id="cfgBtn" class="ghost">Réglages</button>
+</header>
+<main>
+  <p id="unsupported" class="banner" hidden>Ce navigateur ne peut pas écrire dans tes dossiers. Ouvre l’app avec Chrome ou Edge sur ordinateur.</p>
+  <section class="bar">
+    <span>Dossier de classement</span>
+    <strong id="rootName">Aucun dossier choisi</strong>
+    <button id="pick">Choisir le dossier</button>
+  </section>
+  <label class="opt"><input type="checkbox" id="ai"> Demander à l’IA quand la détection échoue</label>
+  <div id="drop" class="drop" tabindex="0" role="button" aria-label="Ajouter des PDF">
+    <div><b>Glisse tes PDF ici</b><br>ou clique pour les choisir</div>
+    <input type="file" id="file" accept="application/pdf,.pdf" multiple hidden>
+  </div>
+  <p id="empty" class="empty">Les PDF classés apparaîtront ici, avec le dossier où ils ont été rangés.</p>
+  <div id="results" class="tablewrap" hidden>
+    <table><thead><tr><th>Fichier</th><th>Fournisseur</th><th>N° affaire</th><th>N° commande</th><th>Statut</th></tr></thead><tbody id="rows"></tbody></table>
+  </div>
+</main>
+<dialog id="dlg">
+  <form method="dialog">
+    <h2>Réglages</h2>
+    <p class="hint">Règles de détection et de rangement (JSON). Copie-colle ce bloc à un collègue pour partager les mêmes règles.</p>
+    <textarea id="cfgText" spellcheck="false" rows="14"></textarea>
+    <label>Clé API Claude (facultatif, gardée sur cet ordinateur uniquement)
+      <input type="password" id="key" autocomplete="off" placeholder="sk-ant-…"></label>
+    <p id="cfgErr" class="err" hidden></p>
+    <div class="actions">
+      <button type="button" id="reset" class="ghost">Valeurs par défaut</button>
+      <button value="cancel" class="ghost">Annuler</button>
+      <button type="button" id="save">Enregistrer</button>
+    </div>
+  </form>
+</dialog>
+<script type="module" src="app.js"></script>
+</body>
+</html>
